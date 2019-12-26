@@ -1,18 +1,23 @@
 class Node
   include Comparable
-  sttr_accessor :data
+  attr_accessor :data, :left_child, :right_child
 
   def <=>(other)
     data <=> other.data 
   end
 
-  def initialize(data, left_child, right_child)
+  def initialize(data)
     @data = data
-    @left_child = left_child
-    @right_child = right_child
-  end
-
-  def build_tree
-
+    @left_child = nil
+    @right_child = nil
   end
 end
+
+#1) Get the Middle of the array and make it root.
+#2) Recursively do same for left half and right half.
+#      a) Get the middle of left half and make it left child of the root
+#          created in step 1.
+#      b) Get the middle of right half and make it right child of the
+#          root created in step 1.
+
+#https://www.geeksforgeeks.org/sorted-array-to-balanced-bst/
