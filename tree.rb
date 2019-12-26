@@ -114,6 +114,17 @@ class Tree
     end
     current
   end
+
+  def find(data)
+    return root if root.data == data
+    current_node = root
+
+    loop do
+      data >= current_node.data ? current_node = current_node.right_child : current_node = current_node.left_child
+      break if current_node.data == data
+    end
+    current_node
+  end
 end
 
   

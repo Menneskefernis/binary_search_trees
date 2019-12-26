@@ -26,5 +26,7 @@ tree = Tree.new(node_array)
 #puts tree.root.right_child.left_child.left_child.right_child.data
 
 
-tree.delete(8)
+#tree.delete(8)
 #puts tree.root
+
+puts tree.find(23).data
