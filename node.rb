@@ -11,6 +11,20 @@ class Node
     @left_child = nil
     @right_child = nil
   end
+
+  def children?
+    self.left_child.nil? && self.right_child.nil? ? false : true
+  end
+
+  def one_child?
+    if !self.left_child.nil? && !self.right_child.nil?
+      false
+    elsif !self.left_child.nil? || !self.right_child.nil?
+      true
+    else
+      false
+    end
+  end
 end
 
 #1) Get the Middle of the array and make it root.

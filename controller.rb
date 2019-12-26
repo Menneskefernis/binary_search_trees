@@ -22,5 +22,9 @@ end
 node_array = create_node_array([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 tree = Tree.new(node_array)
 
-tree.insert(10)
-puts tree.root.right_child.left_child.left_child.data
+#tree.insert(10)
+#puts tree.root.right_child.left_child.left_child.right_child.data
+
+
+tree.delete(8)
+#puts tree.root
