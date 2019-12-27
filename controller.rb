@@ -26,9 +26,15 @@ tree = Tree.new(node_array)
 #puts tree.root.right_child.left_child.left_child.right_child.data
 
 
-#tree.delete(8)
+#tree.delete(9)
 #puts tree.root
 
 #puts tree.find(23).data
 
-puts tree.level_order
+#puts tree.level_order
+
+puts tree.preorder
+puts "------------"
+puts tree.inorder
+puts "------------"
+puts tree.postorder

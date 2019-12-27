@@ -126,8 +126,8 @@ class Tree
     current_node
   end
 
-  def level_order(node = root)
-    return if node.nil?
+  def level_order
+    return if root.nil?
 
     queue = []
     queue << root
@@ -138,6 +138,54 @@ class Tree
       yield node if block_given?
     end
     queue unless block_given?
+  end
+
+  def inorder(node=root, array=[])
+    return if node.nil?
+
+    yield node if block_given?
+
+    preorder(node.left_child, array)
+    array << node.data
+    preorder(node.right_child, array)
+
+    array
+  end
+
+  def preorder(node=root, array=[])
+    return if node.nil?
+
+    yield node if block_given?
+
+    array << node.data
+    preorder(node.left_child, array)
+    preorder(node.right_child, array)
+
+    array
+  end
+
+  def postorder(node=root, array=[])
+    return if node.nil?
+
+    yield node if block_given?
+
+    preorder(node.left_child, array)
+    preorder(node.right_child, array)
+    array << node.data
+
+    array
+  end
+
+  def to_s(node=root)
+    return if node.nil?
+    length = 40
+    
+    puts node.data.to_s.center(length)
+    puts "\/ \\".center(length)
+    puts "#{node.left_child.data if node.left_child}  #{node.right_child.data if node.right_child}".center(length)
+    puts "\/ \\ \/ \\".center(length)
+    puts "#{node.left_child.left_child.data}  #{node.left_child.right_child.data}\
+          #{node.right_child.left_child.data}  #{node.right_child.right_child.data}".center(length)
   end
 end
 
