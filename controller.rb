@@ -29,4 +29,6 @@ tree = Tree.new(node_array)
 #tree.delete(8)
 #puts tree.root
 
-puts tree.find(23).data
+#puts tree.find(23).data
+
+puts tree.level_order

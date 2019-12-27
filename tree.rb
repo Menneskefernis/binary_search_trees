@@ -7,7 +7,7 @@ class Tree
     @root = build_tree(array)
   end
 
-  def insert(node = root, value)
+  def insert(node=root, value)
 
     return Node.new(value) if node.nil? 
 
@@ -59,7 +59,7 @@ class Tree
   #end
 
 
-  def delete(node = root, value)
+  def delete(node=root, value)
   
     # Base Case 
     return node if node.nil? 
@@ -124,6 +124,20 @@ class Tree
       break if current_node.data == data
     end
     current_node
+  end
+
+  def level_order(node = root)
+    return if node.nil?
+
+    queue = []
+    queue << root
+
+    queue.each do |node|
+      queue << node.left_child if node.left_child
+      queue << node.right_child if node.right_child
+      yield node if block_given?
+    end
+    queue unless block_given?
   end
 end
 
