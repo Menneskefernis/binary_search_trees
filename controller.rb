@@ -33,8 +33,14 @@ tree = Tree.new(node_array)
 
 #puts tree.level_order
 
-puts tree.preorder
-puts "------------"
-puts tree.inorder
-puts "------------"
-puts tree.postorder
+#puts tree.preorder
+#puts "------------"
+#puts tree.inorder
+#puts "------------"
+#puts tree.postorder
+#tree.to_s
+#puts tree.depth(tree.find(8))
+tree.insert(10)
+tree.insert(11)
+#puts tree.root.right_child.left_child.left_child.right_child.right_child.data
+puts tree.depth(tree.find(4))

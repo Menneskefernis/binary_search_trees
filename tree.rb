@@ -175,6 +175,18 @@ class Tree
 
     array
   end
+  
+  @@levels = 0
+  def depth(node, counter=0)
+    return if node.nil?
+    
+    @@levels = counter if counter > @@levels
+
+    depth(node.left_child, counter + 1)
+    depth(node.right_child, counter + 1)
+    
+    @@levels
+  end
 
   def to_s(node=root)
     return if node.nil?
@@ -186,6 +198,9 @@ class Tree
     puts "\/ \\ \/ \\".center(length)
     puts "#{node.left_child.left_child.data}  #{node.left_child.right_child.data}\
           #{node.right_child.left_child.data}  #{node.right_child.right_child.data}".center(length)
+    puts "\/ \\ \/ \\".center(length)
+    puts "#{node.left_child.left_child.left_child.data} nil \
+    #{node.right_child.left_child.left_child.data}  #{node.right_child.right_child.left_child.data}".center(length)
   end
 end
 
