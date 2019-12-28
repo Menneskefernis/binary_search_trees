@@ -41,6 +41,7 @@ tree = Tree.new(node_array)
 #tree.to_s
 #puts tree.depth(tree.find(8))
 tree.insert(10)
-tree.insert(11)
+#tree.insert(11)
 #puts tree.root.right_child.left_child.left_child.right_child.right_child.data
-puts tree.depth(tree.find(4))
+#puts tree.depth(tree.find(67))
+puts tree.balanced?

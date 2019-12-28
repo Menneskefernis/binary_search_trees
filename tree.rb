@@ -176,16 +176,23 @@ class Tree
     array
   end
   
-  @@levels = 0
-  def depth(node, counter=0)
+  def depth(node, counter=0, levels=[])
     return if node.nil?
-    
-    @@levels = counter if counter > @@levels
 
-    depth(node.left_child, counter + 1)
-    depth(node.right_child, counter + 1)
-    
-    @@levels
+    depth(node.left_child, counter + 1, levels)
+    depth(node.right_child, counter + 1, levels)
+    levels << counter
+    levels.max
+  end
+
+  def balanced?
+    return true unless root.children?
+    left_depth = self.depth(self.find(root.left_child.data)) if root.left_child
+    right_depth = self.depth(self.find(root.right_child.data)) if root.right_child
+
+    difference = (left_depth - right_depth).abs
+
+    difference > 1 ? false : true
   end
 
   def to_s(node=root)
