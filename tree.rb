@@ -1,10 +1,33 @@
 require_relative 'node'
 
 class Tree
-  attr_reader :root
+  attr_accessor :root
 
   def initialize(array)
-    @root = build_tree(array)
+    nodes = array.map { |value| Node.new(value) }
+    @root = build_tree(nodes)
+  end
+
+  def build_tree(array)
+    return nil if array.length < 1
+
+    mid = array.length / 2
+    #root = Node.new(array[mid])
+    root = array[mid]
+    root.left_child = build_tree(array.slice(0, mid))
+    root.right_child = build_tree(array.slice(mid + 1, array.length))
+
+    root
+  end
+
+  def rebalance!    
+    nodes = []
+    level_order do |node|
+      nodes << node
+    end
+
+    sorted_nodes = nodes.sort_by { |node| node.data }
+    self.root = build_tree(sorted_nodes)
   end
 
   def insert(node=root, value)
@@ -57,7 +80,6 @@ class Tree
   #    node_for_deletion.right_child ? traversal_node
   #  end
   #end
-
 
   def delete(node=root, value)
   
@@ -116,13 +138,17 @@ class Tree
   end
 
   def find(data)
+    return nil if root.nil?
     return root if root.data == data
+    
     current_node = root
-
+    
     loop do
       data >= current_node.data ? current_node = current_node.right_child : current_node = current_node.left_child
+      return nil if current_node.nil?
       break if current_node.data == data
     end
+    
     current_node
   end
 
@@ -138,6 +164,7 @@ class Tree
       yield node if block_given?
     end
     queue unless block_given?
+    #.map { |node| node.data }
   end
 
   def inorder(node=root, array=[])
@@ -195,20 +222,7 @@ class Tree
     difference > 1 ? false : true
   end
 
-  def to_s(node=root)
-    return if node.nil?
-    length = 40
-    
-    puts node.data.to_s.center(length)
-    puts "\/ \\".center(length)
-    puts "#{node.left_child.data if node.left_child}  #{node.right_child.data if node.right_child}".center(length)
-    puts "\/ \\ \/ \\".center(length)
-    puts "#{node.left_child.left_child.data}  #{node.left_child.right_child.data}\
-          #{node.right_child.left_child.data}  #{node.right_child.right_child.data}".center(length)
-    puts "\/ \\ \/ \\".center(length)
-    puts "#{node.left_child.left_child.left_child.data} nil \
-    #{node.right_child.left_child.left_child.data}  #{node.right_child.right_child.left_child.data}".center(length)
-  end
+
 end
 
   
