@@ -4,7 +4,7 @@ class Tree
   attr_accessor :root
 
   def initialize(array)
-    nodes = array.map { |value| Node.new(value) }
+    nodes = prepare_array(array)
     @root = build_tree(nodes)
   end
 
@@ -22,12 +22,31 @@ class Tree
 
   def rebalance!    
     nodes = []
-    level_order do |node|
-      nodes << node
-    end
+    level_order { |node| nodes << node }
 
     sorted_nodes = nodes.sort_by { |node| node.data }
     self.root = build_tree(sorted_nodes)
+  end
+
+  def level_order
+    return if root.nil?
+
+    queue = []
+    queue << root
+
+    queue.each do |node|
+      queue << node.left_child if node.left_child
+      queue << node.right_child if node.right_child
+      yield node if block_given?
+    end
+    queue unless block_given?
+    #queue.map { |node| node.data } unless block_given?
+  end
+
+  def prepare_array(array)
+    array.uniq
+      .sort { |a, b| a > b ? 1 : -1 }
+      .map { |value| Node.new(value) }
   end
 
   def insert(node=root, value)
@@ -150,21 +169,6 @@ class Tree
     end
     
     current_node
-  end
-
-  def level_order
-    return if root.nil?
-
-    queue = []
-    queue << root
-
-    queue.each do |node|
-      queue << node.left_child if node.left_child
-      queue << node.right_child if node.right_child
-      yield node if block_given?
-    end
-    queue unless block_given?
-    #.map { |node| node.data }
   end
 
   def inorder(node=root, array=[])

@@ -1,17 +1,32 @@
 require_relative 'node'
 require_relative 'tree'
 
-def prepare_array(array)
-  array.uniq
-    .sort { |a, b| a > b ? 1 : -1 }
-end
+#unique_and_sorted = prepare_array()
+#tree = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 
-unique_and_sorted = prepare_array([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
-tree = Tree.new(unique_and_sorted)
+array = Array.new(15) { rand(1..100) }
+tree = Tree.new(array)
 
-#tree.insert(10)
-#puts tree.root.right_child.left_child.left_child.right_child.data
-
+puts "Balanced?: " + tree.balanced?.to_s
+puts "Level: " + tree.level_order.map { |node| node.data }.join(', ')
+puts "Pre: " + tree.preorder.join(', ')
+puts "In: " + tree.inorder.join(', ')
+puts "Post: " + tree.postorder.join(', ')
+puts ""
+tree.insert(283)
+tree.insert(937)
+tree.insert(105)
+tree.insert(284)
+tree.insert(5883)
+puts ""
+puts "Balanced?: " + tree.balanced?.to_s
+tree.rebalance!
+puts "Balanced?: " + tree.balanced?.to_s
+puts ""
+puts "Level: " + tree.level_order.map { |node| node.data }.join(', ')
+puts "Pre: " + tree.preorder.join(', ')
+puts "In: " + tree.inorder.join(', ')
+puts "Post: " + tree.postorder.join(', ')
 
 #tree.delete(9)
 #puts tree.root
@@ -27,12 +42,12 @@ tree = Tree.new(unique_and_sorted)
 #puts tree.postorder
 #tree.to_s
 #puts tree.depth(tree.find(8))
-puts tree.level_order.map { |node| node.data }.join(', ')
+#puts tree.level_order.map { |node| node.data }.join(', ')
 
-tree.insert(10)
-tree.insert(11)
+#tree.insert(10)
+#tree.insert(11)
 #puts tree.depth(tree.find(67))
-puts tree.balanced?
-tree.rebalance!
-puts tree.level_order.map { |node| node.data }.join(', ')
-puts tree.balanced?
+#puts tree.balanced?
+#tree.rebalance!
+#puts tree.level_order.map { |node| node.data }.join(', ')
+#puts tree.balanced?
