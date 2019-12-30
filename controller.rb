@@ -8,7 +8,7 @@ array = Array.new(15) { rand(1..100) }
 tree = Tree.new(array)
 
 puts "Balanced?: " + tree.balanced?.to_s
-puts "Level: " + tree.level_order.map { |node| node.data }.join(', ')
+puts "Level: " + tree.level_order.to_s
 puts "Pre: " + tree.preorder.join(', ')
 puts "In: " + tree.inorder.join(', ')
 puts "Post: " + tree.postorder.join(', ')
@@ -18,12 +18,12 @@ tree.insert(937)
 tree.insert(105)
 tree.insert(284)
 tree.insert(5883)
-puts ""
 puts "Balanced?: " + tree.balanced?.to_s
 tree.rebalance!
+puts "Balancing..."
 puts "Balanced?: " + tree.balanced?.to_s
 puts ""
-puts "Level: " + tree.level_order.map { |node| node.data }.join(', ')
+puts "Level: " + tree.level_order.to_s
 puts "Pre: " + tree.preorder.join(', ')
 puts "In: " + tree.inorder.join(', ')
 puts "Post: " + tree.postorder.join(', ')

@@ -37,10 +37,12 @@ class Tree
     queue.each do |node|
       queue << node.left_child if node.left_child
       queue << node.right_child if node.right_child
+      #puts block_given?
+      #require 'pry'; binding.pry
       yield node if block_given?
     end
-    queue unless block_given?
-    #queue.map { |node| node.data } unless block_given?
+    #queue unless block_given?
+    queue.map { |node| node.data } unless block_given?
   end
 
   def prepare_array(array)
@@ -61,44 +63,6 @@ class Tree
 
     return node
   end
-
-  #def insert(value)
-  #  new_node = Node.new(value)
-  #  traversal_node = root
-#
-  #  until traversal_node.left_child.nil? || traversal_node.right_child.nil?
-  #    new_node <= traversal_node ? traversal_node = traversal_node.left_child : traversal_node = traversal_node.right_child
-  #  end
-#
-  #  new_node >= traversal_node ? traversal_node.right_child = new_node : traversal_node.left_child = new_node
-  #end
-
-  #def delete(value)
-  #  traversal_node = root
-  #  node_for_deletion = nil
-#
-  #  unless root.data == value
-  #    until traversal_node.left_child.nil? || traversal_node.right_child.nil?
-  #      value < traversal_node.data ? traversal_node = traversal_node.left_child : traversal_node = traversal_node.right_child
-  #      
-  #      if value == traversal_node.left_child.data
-  #        node_for_deletion = traversal_node.left_child
-  #        break
-  #      elsif value == traversal_node.right_child.data
-  #        node_for_deletion = traversal_node.right_child
-  #        break
-  #      end
-  #    end
-  #  end
-#
-  #  unless node_for_deletion.children?
-  #    traversal_node.right_child == node_for_deletion ? traversal_node.right_child = nil : traversal_node.left_child = nil
-  #  end
-#
-  #  if node_for_deletion.one_child?
-  #    node_for_deletion.right_child ? traversal_node
-  #  end
-  #end
 
   def delete(node=root, value)
   
