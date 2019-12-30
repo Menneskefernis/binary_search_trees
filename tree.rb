@@ -12,7 +12,7 @@ class Tree
     return nil if array.length < 1
 
     mid = array.length / 2
-    #root = Node.new(array[mid])
+
     root = array[mid]
     root.left_child = build_tree(array.slice(0, mid))
     root.right_child = build_tree(array.slice(mid + 1, array.length))
@@ -37,11 +37,8 @@ class Tree
     queue.each do |node|
       queue << node.left_child if node.left_child
       queue << node.right_child if node.right_child
-      #puts block_given?
-      #require 'pry'; binding.pry
       yield node if block_given?
     end
-    #queue unless block_given?
     queue.map { |node| node.data } unless block_given?
   end
 
@@ -189,8 +186,4 @@ class Tree
 
     difference > 1 ? false : true
   end
-
-
 end
-
-  
